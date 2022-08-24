@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'first_name' => fake()->firstName(),
             'last_name'=> fake()->lastName(),
             'contact_no'=> fake()->phoneNumber(),
-            'role' => fake()->shuffleArray(['student', 'warden'])[0],
+            'role' => fake()->shuffleArray(['student', 'student', 'student', 'warden', 'student', 'student'])[0],
             'email' => fake()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
