@@ -4,4 +4,7 @@
     <h4>Room No: {{$hostalRoom->room_no}}</h4>
     <h4>Bed No: {{$hostalRoom->bed_no}}</h4>
     <h4>Location: {{$hostalRoom->hostal->address}}</h4>
+@else
+    <h4>Hostal Room is not yet Allocated</h4>
 @endif
+
