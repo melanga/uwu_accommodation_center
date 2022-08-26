@@ -18,7 +18,7 @@ Route::get("/", function () {
     return view("welcome");
 });
 
-Route::group(["middleware" => "auth"], function () {
+Route::group(["middleware" => ["auth", "verified"]], function () {
     Route::group(
         [
             "prefix" => "student",
