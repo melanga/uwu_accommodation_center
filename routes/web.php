@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StudentController;
+use App\Models\Hostal;
+use App\Models\HostalRoom;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +19,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get("/", function () {
+    return view("welcome");
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get("/dashboard", [DashboardController::class, "index"])
+    ->middleware(["auth"])
+    ->name("dashboard");
 
-require __DIR__.'/auth.php';
+Route::get("/dashboard/student", [StudentController::class, "index"])
+    ->middleware(["auth"])
+    ->name("student-dashboard");
+require __DIR__ . "/auth.php";
