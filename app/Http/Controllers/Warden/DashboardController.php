@@ -13,8 +13,8 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         if ($user->role == "warden") {
-            $hostals = Hostal::all();
-            return view("dashboard", ["hostals" => $hostals]);
+            $hostals = Hostal::latest()->paginate(10);
+            return view("warden.dashboard", ["hostals" => $hostals]);
         } else {
             abort(403);
         }
