@@ -19,6 +19,7 @@ Route::get("/", function () {
 });
 
 Route::group(["middleware" => ["auth", "verified"]], function () {
+    // student's routes
     Route::group(
         [
             "prefix" => "student",
@@ -33,6 +34,7 @@ Route::group(["middleware" => ["auth", "verified"]], function () {
         }
     );
 
+    // warden's routes
     Route::group(
         [
             "prefix" => "warden",
@@ -42,11 +44,16 @@ Route::group(["middleware" => ["auth", "verified"]], function () {
         function () {
             Route::get("dashboard", [
                 \App\Http\Controllers\Warden\DashboardController::class,
-                "index",
+                "index_hostal",
             ])->name("dashboard");
+            Route::get("dashboard/student", [
+                \App\Http\Controllers\Warden\DashboardController::class,
+                "index_student",
+            ])->name("dashboard.student");
         }
     );
 
+    // admin's routes
     Route::group(
         [
             "prefix" => "admin",

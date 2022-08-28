@@ -11,11 +11,39 @@ class HostalRoom extends Model
 
     public function hostal()
     {
-        return $this->belongsTo(Hostal::class, 'hostal_id');
+        return $this->belongsTo(Hostal::class, "hostal_id");
     }
 
     public function student()
     {
-        return $this->belongsTo(User::class, 'student_id');
+        return $this->belongsTo(User::class, "student_id");
+    }
+
+    public function scopeFilter($query, $filters)
+    {
+        if ($filters["search"] ?? false) {
+            $query
+                ->whereHas("student", function ($query) use ($filters) {
+                    $query->where(
+                        "email",
+                        "ilike",
+                        "%" . $filters["search"] . "%"
+                    );
+                })
+                ->orWhereHas("student", function ($query) use ($filters) {
+                    $query->where(
+                        "first_name",
+                        "ilike",
+                        "%" . $filters["search"] . "%"
+                    );
+                })
+                ->orWhereHas("student", function ($query) use ($filters) {
+                    $query->where(
+                        "last_name",
+                        "ilike",
+                        "%" . $filters["search"] . "%"
+                    );
+                });
+        }
     }
 }

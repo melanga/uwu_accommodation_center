@@ -11,6 +11,16 @@ class Hostal extends Model
 
     public function hostalRooms()
     {
-        return $this->hasMany(HostalRoom::class, 'hostal_id');
+        return $this->hasMany(HostalRoom::class, "hostal_id");
+    }
+
+    public function scopeFilter($query, $filters)
+    {
+        if ($filters["search"] ?? false) {
+            $query
+                ->where("name", "ilike", "%" . $filters["search"] . "%")
+                ->orWhere("address", "ilike", "%" . $filters["search"] . "%")
+                ->orWhere("type", "ilike", $filters["search"]);
+        }
     }
 }
