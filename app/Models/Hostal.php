@@ -9,11 +9,6 @@ class Hostal extends Model
 {
     use HasFactory;
 
-    public function hostalRooms()
-    {
-        return $this->hasMany(HostalRoom::class, "hostal_id");
-    }
-
     public function scopeFilter($query, $filters)
     {
         if ($filters["search"] ?? false) {
@@ -22,5 +17,16 @@ class Hostal extends Model
                 ->orWhere("address", "ilike", "%" . $filters["search"] . "%")
                 ->orWhere("type", "ilike", $filters["search"]);
         }
+    }
+
+    // relationships
+    public function hostalRooms()
+    {
+        return $this->hasMany(HostalRoom::class, "hostal_id");
+    }
+
+    public function appeals()
+    {
+        return $this->hasMany(Appeal::class, "hostal_id");
     }
 }

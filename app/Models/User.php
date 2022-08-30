@@ -60,4 +60,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(HostalRoom::class);
     }
+
+    public function appeals()
+    {
+        return $this->hasMany(Appeal::class);
+    }
 }

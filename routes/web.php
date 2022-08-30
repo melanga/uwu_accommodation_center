@@ -31,6 +31,14 @@ Route::group(["middleware" => ["auth", "verified"]], function () {
                 \App\Http\Controllers\Student\DashboardController::class,
                 "index",
             ])->name("dashboard");
+            Route::get("appeal", [
+                \App\Http\Controllers\Student\AppealController::class,
+                "index",
+            ])->name("appeal");
+            Route::post("appeal", [
+                \App\Http\Controllers\Student\AppealController::class,
+                "store",
+            ])->name("appeal.store");
         }
     );
 
