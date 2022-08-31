@@ -1,9 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-3xl text-gray-800 leading-tight text-center">
             {{--            {{ __('Dashboard') }}--}}
             @if(Auth::user()->role == 'student')
-                Student Dashboard
+                UWU Accommodation Center
+                <h4 class="text-center">for students of Uva Wellassa University</h4>
             @elseif(Auth::user()->role == 'warden')
                 Warden Dashboard
             @endif
