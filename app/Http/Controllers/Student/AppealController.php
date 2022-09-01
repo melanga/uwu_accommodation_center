@@ -9,26 +9,30 @@ use Illuminate\Http\Request;
 
 class AppealController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view("student.appeal");
+
+        $hostals = Hostal::all();
+
+        return view("student.appeal", [
+            "hostals" => $hostals,
+
+        ]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'message' => ['required', 'string', 'max:255'],
-            'hostal' => ['required', 'string', 'max:255'],
+            "message" => ["required", "string", "max:255"],
+            "hostal" => ["required", "integer"],
         ]);
-        // get hostal from hostal name
-        $hostal = Hostal::where('name', $request->hostal)->first();
         // create appeal
         $appeal = Appeal::create([
-            'message' => $request->message,
-            'hostal_id' => $hostal->id,
-            'student_id' => auth()->user()->id,
+            "message" => $request->message,
+            "hostal_id" => $request->hostal,
+            "student_id" => auth()->user()->id,
         ]);
         // redirect to dashboard
-        return redirect()->route('student.dashboard');
+        return redirect()->route("student.dashboard");
     }
 }
