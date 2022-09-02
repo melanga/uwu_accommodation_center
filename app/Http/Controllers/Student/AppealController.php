@@ -11,12 +11,27 @@ class AppealController extends Controller
 {
     public function index(Request $request)
     {
-
-        $hostals = Hostal::all();
+        if ($request->male_selected == "on" and !$request->female_selected) {
+            $hostals = Hostal::where("type", "male")->get();
+            $male_selected = true;
+            $female_selected = false;
+        } elseif (
+            $request->female_selected == "on" and
+            !$request->male_selected
+        ) {
+            $hostals = Hostal::where("type", "female")->get();
+            $male_selected = false;
+            $female_selected = true;
+        } else {
+            $hostals = Hostal::all();
+            $male_selected = false;
+            $female_selected = false;
+        }
 
         return view("student.appeal", [
             "hostals" => $hostals,
-
+            "male_selected" => $male_selected,
+            "female_selected" => $female_selected,
         ]);
     }
 

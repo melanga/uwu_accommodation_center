@@ -5,11 +5,23 @@
             <!-- Validation Errors -->
             <x-auth-validation-errors class="mb-4" :errors="$errors"/>
             <form method="GET" action="{{ route('student.appeal') }}">
-                <div class="flex items-center mr-4">
-                    <input id="male_selected" type="checkbox" value=""
-                           name="male_selected"
-                           class="w-4 h-4 text-orange-500 bg-gray-100 rounded border-gray-300 focus:ring-orange-500 focus:ring-2">
-                    <label for="male" class="ml-2 text-sm font-medium text-gray-900">Male</label>
+                <div class="flex">
+                    <div class="flex items-center mr-4">
+                        <input id="male_selected" type="checkbox"
+                               name="male_selected"
+                               @checked($male_selected)
+                               onchange="submit()"
+                               class="w-4 h-4 text-orange-500 bg-gray-100 rounded border-gray-300 focus:ring-orange-500 focus:ring-2">
+                        <label for="male_selected" class="ml-2 text-sm font-medium text-gray-900">Male</label>
+                    </div>
+                    <div class="flex items-center mr-4">
+                        <input id="female_selected" type="checkbox"
+                               name="female_selected"
+                               @checked($female_selected)
+                               onchange="submit()"
+                               class="w-4 h-4 text-orange-500 bg-gray-100 rounded border-gray-300 focus:ring-orange-500 focus:ring-2">
+                        <label for="female_selected" class="ml-2 text-sm font-medium text-gray-900">Female</label>
+                    </div>
                 </div>
             </form>
             <form method="POST" action="{{ route('student.appeal') }}">
