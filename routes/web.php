@@ -71,8 +71,20 @@ Route::group(["middleware" => ["auth", "verified"]], function () {
         function () {
             Route::get("dashboard", [
                 \App\Http\Controllers\Admin\DashboardController::class,
-                "index",
+                "index_hostal",
             ])->name("dashboard");
+            Route::get("dashboard/student", [
+                \App\Http\Controllers\Admin\DashboardController::class,
+                "index_student",
+            ])->name("dashboard.student");
+            Route::get("dashboard/addStudents", [
+                \App\Http\Controllers\Admin\DashboardController::class,
+                "index_addStudent",
+            ])->name("dashboard.addStudents");
+            Route::post("dashboard/importStudents", [
+                \App\Http\Controllers\Admin\DashboardController::class,
+                "importStudents",
+            ])->name("dashboard.import");
         }
     );
 });

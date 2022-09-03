@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Hostal extends Model
 {
@@ -17,6 +18,30 @@ class Hostal extends Model
                 ->orWhere("address", "ilike", "%" . $filters["search"] . "%")
                 ->orWhere("type", "ilike", $filters["search"]);
         }
+    }
+
+    public static function getHostelName()
+    {
+        $records = DB::table("hostals")->select("name");
+        return $records;
+    }
+
+    public static function getRoomCapacity($hostel)
+    {
+        $records = DB::table("hostals")
+            ->select("room_count")
+            ->where("name", "=", $hostel)
+            ->value("room_count");
+        return $records;
+    }
+
+    public static function getBedCapacity($hostel)
+    {
+        $records = DB::table("hostals")
+            ->select("room_capacity")
+            ->where("name", "=", $hostel)
+            ->value("room_capacity");
+        return $records;
     }
 
     // relationships

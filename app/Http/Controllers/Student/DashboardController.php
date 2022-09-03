@@ -11,6 +11,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        // TODO if no room there is error
         $user = Auth::user();
         if ($user->role == 'student') {
             $hostalRoom = HostalRoom::class::where('student_id', $user->id)->get()[0];

@@ -11,13 +11,25 @@
                 </div>
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    @if(!(Auth::user()->role == 'student'))
+                    @if(Auth::user()->role == 'warden')
                         <x-nav-link :href="route('warden.dashboard')" :active="request()->routeIs('warden.dashboard')">
                             {{ __('Hostals') }}
                         </x-nav-link>
                         <x-nav-link :href="route('warden.dashboard.student')"
                                     :active="request()->routeIs('warden.dashboard.student')">
                             {{ __('Students') }}
+                        </x-nav-link>
+                    @elseif(Auth::user()->role == 'admin')
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                            {{ __('Hostals') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.dashboard.student')"
+                                    :active="request()->routeIs('admin.dashboard.student')">
+                            {{ __('Students') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.dashboard.addStudents')"
+                                    :active="request()->routeIs('admin.dashboard.addStudents')">
+                            {{ __('Add Students') }}
                         </x-nav-link>
                     @endif
                 </div>
