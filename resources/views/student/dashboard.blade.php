@@ -3,10 +3,10 @@
         <div
             class="w-full sm:max-w-md space-y-4 py-8 mt-12 px-6 bg-slate-900 text-white shadow-md overflow-hidden sm:rounded-lg">
             @if($hostalRoom)
-                <h2 class="text-xl">Hostal Name: {{$hostalRoom->hostal->name}}</h2>
+                <h2 class="text-xl">Hostal Name: {{$hostal->name}}</h2>
                 <h4>Room No: {{$hostalRoom->room_no}}</h4>
                 <h4>Bed No: {{$hostalRoom->bed_no}}</h4>
-                <h4>Location: {{$hostalRoom->hostal->address}}</h4>
+                <h4>Location: {{$hostal->address}}</h4>
             @else
                 <h4>Hostel Room is not yet Allocated</h4>
             @endif

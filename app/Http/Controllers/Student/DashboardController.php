@@ -3,21 +3,27 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Models\HostalRoom;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Hostal;
+use App\Models\Student;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // TODO if no room there is error
-        $user = Auth::user();
-        if ($user->role == 'student') {
-            $hostalRoom = HostalRoom::class::where('student_id', $user->id)->get()[0];
-            return view('student.dashboard', ['hostalRoom' => $hostalRoom, 'student' => $user]);
-        } else {
-            abort(403);
-        }
+        $student = Student::where(
+            "email",
+            "ilike",
+            "%" . auth()->user()->email . "%"
+        )->first();
+        $hostal = Hostal::where(
+            "name",
+            "like",
+            "%" . $student->hostel . "%"
+        )->first();
+        // $hostalRoom = HostalRoom::class::where('student_id', auth()->user()->id)->get()[0];
+        return view("student.dashboard", [
+            "hostalRoom" => $student,
+            "hostal" => $hostal,
+        ]);
     }
 }
