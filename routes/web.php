@@ -93,6 +93,26 @@ Route::group(["middleware" => ["auth", "verified"]], function () {
                 \App\Http\Controllers\Admin\DashboardController::class,
                 "store_hostal",
             ])->name("dashboard.addHostal.store");
+            // return assign Hostels view
+            Route::get("dashboard/assignHostal", [
+                \App\Http\Controllers\Admin\DashboardController::class,
+                "index_assignHostels",
+            ])->name("dashboard.assignHostels");
+            // assign imported students to hostels
+            Route::post("dashboard/assignHostal/assign", [
+                \App\Http\Controllers\Admin\AssignHostelsController::class,
+                "store",
+            ])->name("dashboard.assignHostels.assign");
+            // delete imported students
+            Route::post("dashboard/assignHostal", [
+                \App\Http\Controllers\Admin\DashboardController::class,
+                "deleteStudents",
+            ])->name("dashboard.assignHostels.deleteStudents");
+            // clear assigned hostels
+            Route::post("dashboard/assignHostal/clear", [
+                \App\Http\Controllers\Admin\AssignHostelsController::class,
+                "destroy",
+            ])->name("dashboard.assignHostels.clear");
         }
     );
 });

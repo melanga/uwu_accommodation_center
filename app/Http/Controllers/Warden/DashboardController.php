@@ -27,6 +27,7 @@ class DashboardController extends Controller
         $user = Auth::user();
         if ($user->role == "warden") {
             $hostalRooms = HostalRoom::latest()
+                ->where("student_email", "not like", "unassigned")
                 ->filter(request(["search"]))
                 ->paginate(10);
             $hostals = Hostal::latest()

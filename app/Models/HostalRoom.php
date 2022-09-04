@@ -9,6 +9,14 @@ class HostalRoom extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
+    public function setStudent($email)
+    {
+        $this->attributes['student_email'] = $email;
+        $this->save();
+    }
+
     public function hostal()
     {
         return $this->belongsTo(Hostal::class, "hostal_id");

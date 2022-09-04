@@ -21,7 +21,7 @@ class DashboardController extends Controller
             $hostals = Hostal::latest()
                 ->filter(request(["search"]))
                 ->paginate(10);
-            return view("warden.hostal.dashboard", ["hostals" => $hostals]);
+            return view("admin.hostal.dashboard", ["hostals" => $hostals]);
         } else {
             abort(403);
         }
@@ -30,12 +30,13 @@ class DashboardController extends Controller
     public function index_student()
     {
         $hostalRooms = HostalRoom::latest()
+            ->where("student_email", "not like", "unassigned")
             ->filter(request(["search"]))
             ->paginate(10);
         $hostals = Hostal::latest()
             ->filter(request(["search"]))
             ->paginate(10);
-        return view("warden.student.dashboard", [
+        return view("admin.student.dashboard", [
             "hostals" => $hostals,
             "hostalRooms" => $hostalRooms,
         ]);
@@ -51,6 +52,20 @@ class DashboardController extends Controller
     {
         Excel::import(new StudentsImport(), $request->file("student_file"));
         return back();
+    }
+
+    public function deleteStudents()
+    {
+        Student::truncate();
+        return back();
+    }
+
+    public function index_assignHostels()
+    {
+        $importedStudents = DB::table("students")->paginate(10);
+        return view("admin.assignHostels.dashboard", [
+            "students" => $importedStudents,
+        ]);
     }
 
     public function index_addHostal()
@@ -78,15 +93,6 @@ class DashboardController extends Controller
             "type" => $request->type,
             "level" => $request->level,
         ]);
-
-        //        $query = DB::table("hostals")->insert([
-        //            "name" => $request->input("hostel_name"),
-        //            "room_count" => $request->input("no_room"),
-        //            "room_capacity" => $request->input("room_capacity"),
-        //            "address" => $request->input("address"),
-        //            "type" => $request->input("type"),
-        //            "level" => $request->input("level"),
-        //        ]);
 
         if ($hostal) {
             return back()->with("success", "Hostel details succesfully added");

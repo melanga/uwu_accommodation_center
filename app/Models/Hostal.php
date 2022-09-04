@@ -46,7 +46,7 @@ class Hostal extends Model
         return $records;
     }
 
-    public static function getHostelCount($gender, $year)
+    public static function getHostelCount($gender, $year): int
     {
         $records = DB::table("hostals")
             ->select("name")

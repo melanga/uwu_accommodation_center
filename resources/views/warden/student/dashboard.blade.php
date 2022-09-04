@@ -9,8 +9,8 @@
                     <th scope="col" class="py-3 px-6">Hostal</th>
                     <th scope="col" class="py-3 px-6">Room no</th>
                     <th scope="col" class="py-3 px-6">Bed no</th>
-                    <th scope="col" class="py-3 px-6">First Name</th>
-                    <th scope="col" class="py-3 px-6">Last Name</th>
+                    {{--                    <th scope="col" class="py-3 px-6">First Name</th>--}}
+                    {{--                    <th scope="col" class="py-3 px-6">Last Name</th>--}}
                     <th scope="col" class="py-3 px-6">email</th>
                 </tr>
                 </thead>
@@ -20,9 +20,9 @@
                         <td class="py-4 px-6">{{$hostalRoom->hostal->name}}</td>
                         <td class="py-4 px-6">{{$hostalRoom->room_no}}</td>
                         <td class="py-4 px-6">{{$hostalRoom->bed_no}}</td>
-                        <td class="py-4 px-6">{{$hostalRoom->student->first_name}}</td>
-                        <td class="py-4 px-6">{{$hostalRoom->student->last_name}}</td>
-                        <td class="py-4 px-6">{{$hostalRoom->student->email}}</td>
+                        {{--                        <td class="py-4 px-6">{{$hostalRoom->student->first_name}}</td>--}}
+                        {{--                        <td class="py-4 px-6">{{$hostalRoom->student->last_name}}</td>--}}
+                        <td class="py-4 px-6">{{$hostalRoom->student_email}}</td>
                     </tr>
                 @endforeach
                 </tbody>
