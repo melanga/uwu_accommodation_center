@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{route('welcome')}}">
                         <x-application-logo class="block h-10 w-auto fill-current text-orange-800"/>
                     </a>
                 </div>
@@ -30,6 +30,10 @@
                         <x-nav-link :href="route('admin.dashboard.addStudents')"
                                     :active="request()->routeIs('admin.dashboard.addStudents')">
                             {{ __('Add Students') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.dashboard.addHostal')"
+                                    :active="request()->routeIs('admin.dashboard.addHostal')">
+                            {{ __('Add Hostel') }}
                         </x-nav-link>
                     @endif
                 </div>

@@ -10,6 +10,8 @@ class Hostal extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function scopeFilter($query, $filters)
     {
         if ($filters["search"] ?? false) {
@@ -41,6 +43,17 @@ class Hostal extends Model
             ->select("room_capacity")
             ->where("name", "=", $hostel)
             ->value("room_capacity");
+        return $records;
+    }
+
+    public static function getHostelCount($gender, $year)
+    {
+        $records = DB::table("hostals")
+            ->select("name")
+            ->where("type", "=", strtolower($gender))
+            ->where("level", "=", $year)
+            ->get()
+            ->count();
         return $records;
     }
 

@@ -29,6 +29,9 @@
             </table>
         @endif
     </div>
+    <div class="mt-6 p-4">
+        {{$students->links()}}
+    </div>
     <section class="layout_padding">
         <div class="container">
             {{--            <div class="heading_container heading_center">--}}

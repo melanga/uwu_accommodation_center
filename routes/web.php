@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", function () {
     return view("welcome");
-});
+})->name("welcome");
 
 Route::group(["middleware" => ["auth", "verified"]], function () {
     // student's routes
@@ -85,6 +85,14 @@ Route::group(["middleware" => ["auth", "verified"]], function () {
                 \App\Http\Controllers\Admin\DashboardController::class,
                 "importStudents",
             ])->name("dashboard.import");
+            Route::get("dashboard/addHostal", [
+                \App\Http\Controllers\Admin\DashboardController::class,
+                "index_addHostal",
+            ])->name("dashboard.addHostal");
+            Route::post("dashboard/addHostal", [
+                \App\Http\Controllers\Admin\DashboardController::class,
+                "store_hostal",
+            ])->name("dashboard.addHostal.store");
         }
     );
 });

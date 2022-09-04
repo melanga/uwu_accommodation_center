@@ -15,17 +15,29 @@ class StudentsImport implements ToModel, WithHeadingRow, WithValidation
         if (strtolower($gender) == "male") {
             $hostelName = [];
 
-            foreach (Hostal::all()->where("type", "=", "male") as $hostel) {
+            foreach (
+                Hostal::all()
+                    ->where("level", "=", $year)
+                    ->where("type", "=", "male")
+                as $hostel
+            ) {
                 array_push($hostelName, $hostel->name);
             }
-            $bRandVal = rand(0, 2);
+            $count = Hostal::getHostelCount($gender, strval($year));
+            $bRandVal = rand(0, $count - 1);
             return $hostelName[$bRandVal];
         } elseif (strtolower($gender) == "female") {
             $girlsHostelName = [];
-            foreach (Hostal::all()->where("type", "=", "female") as $hostel) {
+            foreach (
+                Hostal::all()
+                    ->where("level", "=", $year)
+                    ->where("type", "=", "female")
+                as $hostel
+            ) {
                 array_push($girlsHostelName, $hostel->name);
             }
-            $gRandVal = rand(0, 2);
+            $count = Hostal::getHostelCount($gender, strval($year));
+            $gRandVal = rand(0, $count - 1);
             return $girlsHostelName[$gRandVal];
         }
     }
@@ -34,16 +46,14 @@ class StudentsImport implements ToModel, WithHeadingRow, WithValidation
     {
         // Hostels::where('hostel',$hostel);
         $totalRoom = Hostal::getRoomCapacity($hostel);
-        $num = rand(1, $totalRoom);
-        return $num;
+        return rand(1, $totalRoom);
     }
 
     public function bed_no($hostel)
     {
         // Hostels::where('hostel',$hostel);
         $totalBed = Hostal::getBedCapacity($hostel);
-        $num = rand(1, $totalBed);
-        return $num;
+        return rand(1, $totalBed);
     }
 
     public function model(array $row)
