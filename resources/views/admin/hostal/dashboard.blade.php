@@ -1,6 +1,6 @@
 <x-dashboard>
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">Hostal Details</h2>
-    @include('partials._search', ['route' => route('warden.dashboard'), 'text'=>"Search Hostals"])
+    @include('partials._search', ['route' => route('admin.dashboard'), 'text'=>"Search Hostals"])
     <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-6">
         @if($hostals)
             <table class="w-full text-left text-gray-500">

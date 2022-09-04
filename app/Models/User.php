@@ -58,7 +58,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hostalRoom()
     {
-        return $this->hasOne(HostalRoom::class);
+        return $this->hasOne(HostalRoom::class, "student_id", "email");
     }
 
     public function appeals()

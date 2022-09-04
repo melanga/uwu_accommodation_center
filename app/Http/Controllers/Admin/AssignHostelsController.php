@@ -17,17 +17,17 @@ class AssignHostelsController extends Controller
             ->select("email", "year", "gender")
             ->get();
         // create array of numbers 1 to length of imported students
-        $numbers = range(1, count($importedStudents));
+        $numbers = range(0, count($importedStudents) - 1);
         // shuffle the array
         shuffle($numbers);
 
         for ($i = 0; $i < $importedStudents->count(); $i++) {
-            $year = $importedStudents[$i]->year;
-            $gender = strtolower($importedStudents[$i]->gender);
+            $year = $importedStudents[$numbers[$i]]->year;
+            $gender = strtolower($importedStudents[$numbers[$i]]->gender);
             // check if email is already assigned to a hostel
             $isAssigned = HostalRoom::where(
                 "student_email",
-                $importedStudents[$i]->email
+                $importedStudents[$numbers[$i]]->email
             )->exists();
             // if not assigned
             if (!$isAssigned) {
@@ -44,7 +44,8 @@ class AssignHostelsController extends Controller
                 // assign hostel room to student
                 try {
                     $firstEmptyHostelRoom->update([
-                        "student_email" => $importedStudents[$i]->email,
+                        "student_email" =>
+                            $importedStudents[$numbers[$i]]->email,
                     ]);
                 } catch (\Exception $e) {
                     return back()->with("fail", "Something went wrong");

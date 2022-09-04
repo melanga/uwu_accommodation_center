@@ -11,12 +11,6 @@ class HostalRoom extends Model
 
     protected $guarded = [];
 
-    public function setStudent($email)
-    {
-        $this->attributes['student_email'] = $email;
-        $this->save();
-    }
-
     public function hostal()
     {
         return $this->belongsTo(Hostal::class, "hostal_id");
@@ -24,7 +18,16 @@ class HostalRoom extends Model
 
     public function student()
     {
-        return $this->belongsTo(User::class, "student_id");
+        return $this->belongsTo(User::class, "student_email", "email");
+    }
+
+    public function getStudent()
+    {
+        $student = User::where(
+            "email",
+            $this->attributes["student_email"]
+        )->first();
+        return $student;
     }
 
     public function scopeFilter($query, $filters)
@@ -51,7 +54,12 @@ class HostalRoom extends Model
                         "ilike",
                         "%" . $filters["search"] . "%"
                     );
-                });
+                })
+                ->orWhere(
+                    "student_email",
+                    "ilike",
+                    "%" . $filters["search"] . "%"
+                );
         }
     }
 }
