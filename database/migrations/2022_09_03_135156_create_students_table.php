@@ -19,9 +19,6 @@ return new class extends Migration {
             $table->string("last_name");
             $table->string("year");
             $table->string("email");
-            $table->string("hostel");
-            $table->string("room_no");
-            $table->string("bed_no");
             $table->string("gender");
             $table->timestamps();
         });

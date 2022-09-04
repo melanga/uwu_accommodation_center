@@ -24,20 +24,16 @@ class DashboardController extends Controller
 
     public function index_student()
     {
-        $user = Auth::user();
-        if ($user->role == "warden") {
-            $hostalRooms = HostalRoom::latest()
-                ->filter(request(["search"]))
-                ->paginate(10);
-            $hostals = Hostal::latest()
-                ->filter(request(["search"]))
-                ->paginate(10);
-            return view("warden.student.dashboard", [
-                "hostals" => $hostals,
-                "hostalRooms" => $hostalRooms,
-            ]);
-        } else {
-            abort(403);
-        }
+        $hostalRooms = HostalRoom::latest()
+            ->where("student_email", "not like", "unassigned")
+            ->filter(request(["search"]))
+            ->paginate(10);
+        $hostals = Hostal::latest()
+            ->filter(request(["search"]))
+            ->paginate(10);
+        return view("warden.student.dashboard", [
+            "hostals" => $hostals,
+            "hostalRooms" => $hostalRooms,
+        ]);
     }
 }

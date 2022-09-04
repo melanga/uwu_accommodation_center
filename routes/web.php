@@ -69,18 +69,17 @@ Route::group(["middleware" => ["auth", "verified"]], function () {
             "as" => "admin.",
         ],
         function () {
+            // hostel Dashboard view
             Route::get("dashboard", [
                 \App\Http\Controllers\Admin\DashboardController::class,
                 "index_hostal",
             ])->name("dashboard");
+            // student Dashboard view
             Route::get("dashboard/student", [
                 \App\Http\Controllers\Admin\DashboardController::class,
                 "index_student",
             ])->name("dashboard.student");
-            Route::get("dashboard/addStudents", [
-                \App\Http\Controllers\Admin\DashboardController::class,
-                "index_addStudent",
-            ])->name("dashboard.addStudents");
+            // importing students from the csv
             Route::post("dashboard/importStudents", [
                 \App\Http\Controllers\Admin\DashboardController::class,
                 "importStudents",
@@ -93,6 +92,35 @@ Route::group(["middleware" => ["auth", "verified"]], function () {
                 \App\Http\Controllers\Admin\DashboardController::class,
                 "store_hostal",
             ])->name("dashboard.addHostal.store");
+            // return assign Hostels view
+            Route::get("dashboard/assignHostal", [
+                \App\Http\Controllers\Admin\DashboardController::class,
+                "index_assignHostels",
+            ])->name("dashboard.assignHostels");
+            // assign imported students to hostels
+            Route::post("dashboard/assignHostal/assign", [
+                \App\Http\Controllers\Admin\AssignHostelsController::class,
+                "store",
+            ])->name("dashboard.assignHostels.assign");
+            // delete imported students
+            Route::post("dashboard/assignHostal", [
+                \App\Http\Controllers\Admin\DashboardController::class,
+                "deleteStudents",
+            ])->name("dashboard.assignHostels.deleteStudents");
+            // clear assigned hostels
+            Route::post("dashboard/assignHostal/clear", [
+                \App\Http\Controllers\Admin\AssignHostelsController::class,
+                "destroy",
+            ])->name("dashboard.assignHostels.clear");
+            // appeal routes
+            Route::get("dashboard/appeal", [
+                \App\Http\Controllers\Admin\AppealController::class,
+                "index",
+            ])->name("dashboard.appeal");
+            Route::post("dashboard/appeal", [
+                \App\Http\Controllers\Admin\AppealController::class,
+                "approve",
+            ])->name("dashboard.appeal");
         }
     );
 });

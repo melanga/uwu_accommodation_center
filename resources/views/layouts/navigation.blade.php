@@ -1,12 +1,12 @@
 <nav x-data="{ open: false }" class="bg-slate-900 border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-20">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{route('welcome')}}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-orange-800"/>
+                        <x-application-logo class="block h-16 w-auto fill-current text-orange-800"/>
                     </a>
                 </div>
                 <!-- Navigation Links -->
@@ -27,9 +27,13 @@
                                     :active="request()->routeIs('admin.dashboard.student')">
                             {{ __('Students') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('admin.dashboard.addStudents')"
-                                    :active="request()->routeIs('admin.dashboard.addStudents')">
-                            {{ __('Add Students') }}
+                        <x-nav-link :href="route('admin.dashboard.assignHostels')"
+                                    :active="request()->routeIs('admin.dashboard.assignHostels')">
+                            {{ __('Assign Hostels') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.dashboard.appeal')"
+                                    :active="request()->routeIs('admin.dashboard.appeal')">
+                            {{ __('Appeals') }}
                         </x-nav-link>
                         <x-nav-link :href="route('admin.dashboard.addHostal')"
                                     :active="request()->routeIs('admin.dashboard.addHostal')">
