@@ -11,8 +11,8 @@ class AppealController extends Controller
 {
     public function index()
     {
-        $appeals = Appeal::where("approved", false)->get();
-        return view("admin.appeal", ["appeals" => $appeals]);
+        $appeals = Appeal::orderBy("approved", "asc")->paginate(10);
+        return view("admin.appeals.dashboard", ["appeals" => $appeals]);
     }
 
     public function approve(Request $request)
@@ -20,11 +20,23 @@ class AppealController extends Controller
         $appeal = Appeal::find($request->id);
         // take first free unassigned room
         $hostalRoom = HostalRoom::where("hostal_id", $appeal->hostal_id)
-            ->where("student_id", null)
+            ->where("student_email", "unassigned")
+            ->orderBy("room_no", "asc")
             ->first();
+        // take current existing room
+        $currentHostalRoom = HostalRoom::where(
+            "student_email",
+            $appeal->student->email
+        )->first();
+
         if ($hostalRoom) {
-            $hostalRoom->student_id = $appeal->student_id;
+            // unassign current room
+            $currentHostalRoom->student_email = "unassigned";
+            $currentHostalRoom->save();
+            // add student to the room
+            $hostalRoom->student_email = $appeal->student->email;
             $hostalRoom->save();
+            // set appeal to approved
             $appeal->approved = true;
             $appeal->save();
             return redirect()
