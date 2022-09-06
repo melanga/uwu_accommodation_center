@@ -95,6 +95,16 @@ class DashboardController extends Controller
         ]);
 
         if ($hostal) {
+            for ($i = 1; $i <= $request->no_room; $i++) {
+                for ($j = 1; $j <= $request->room_capacity; $j++) {
+                    HostalRoom::create([
+                        "hostal_id" => $hostal->id,
+                        "room_no" => $i,
+                        "bed_no" => $j,
+                        "student_email" => "unassigned",
+                    ]);
+                }
+            }
             return back()->with("success", "Hostel details succesfully added");
         } else {
             return back()->with("fail", "Something went wrong");

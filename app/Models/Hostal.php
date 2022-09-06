@@ -22,39 +22,12 @@ class Hostal extends Model
         }
     }
 
-    public static function getHostelName()
+    public function getHostalOccupantCount()
     {
-        $records = DB::table("hostals")->select("name");
-        return $records;
-    }
-
-    public static function getRoomCapacity($hostel)
-    {
-        $records = DB::table("hostals")
-            ->select("room_count")
-            ->where("name", "=", $hostel)
-            ->value("room_count");
-        return $records;
-    }
-
-    public static function getBedCapacity($hostel)
-    {
-        $records = DB::table("hostals")
-            ->select("room_capacity")
-            ->where("name", "=", $hostel)
-            ->value("room_capacity");
-        return $records;
-    }
-
-    public static function getHostelCount($gender, $year): int
-    {
-        $records = DB::table("hostals")
-            ->select("name")
-            ->where("type", "=", strtolower($gender))
-            ->where("level", "=", $year)
-            ->get()
+        return DB::table("hostal_rooms")
+            ->where("hostal_id", $this->attributes["id"])
+            ->where("student_email", "not like", "unassigned")
             ->count();
-        return $records;
     }
 
     // relationships

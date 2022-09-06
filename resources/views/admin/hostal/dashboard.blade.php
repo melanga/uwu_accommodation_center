@@ -22,7 +22,7 @@
                         <td class="py-4 px-6">{{$hostal->room_count}}</td>
                         <td class="py-4 px-6">{{$hostal->room_capacity}}</td>
                         <td class="py-4 px-6">{{$hostal->room_capacity * $hostal->room_count}}</td>
-                        <td class="py-4 px-6">{{$hostal->hostalRooms->count()}}</td>
+                        <td class="py-4 px-6">{{$hostal->getHostalOccupantCount()}}</td>
                     </tr>
                 @endforeach
                 </tbody>

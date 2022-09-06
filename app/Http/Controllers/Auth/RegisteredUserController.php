@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
                 "email",
                 "max:255",
                 "unique:users",
-                new UniversityMail(),
+                //                new UniversityMail(),
             ],
             "password" => ["required", "confirmed", Password::defaults()],
         ]);
