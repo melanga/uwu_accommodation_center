@@ -46,7 +46,7 @@
     </div>
     <!-- header section strats -->
     <header class="header_section">
-        <div class="container flex justify-content-around">
+        <div class="container">
             <nav class="navbar navbar-expand-lg custom_nav-container ">
                 <a class="navbar-brand" href="/">
             <span>
@@ -59,7 +59,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class=""> </span>
                 </button>
-
+                <div class="w-75"></div>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     {{--                    <ul class="navbar-nav  mx-auto ">--}}
                     {{--                        <li class="nav-item active">--}}
@@ -103,7 +103,7 @@
                             <div class="col-md-7 col-lg-6 ">
                                 <div class="detail-box">
                                     <h1>
-                                        Corel Beauty
+                                        Coral Beauty
                                     </h1>
                                     <p>
                                         a Boys hostel with 76 rooms

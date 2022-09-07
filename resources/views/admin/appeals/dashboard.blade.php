@@ -24,14 +24,24 @@
                         <td class="py-4 px-6">{{$appeal->approved ? "approved" : "pending"}}</td>
                         <td class="py-4 px-6 align-content-center">
                             @if(! $appeal->approved)
-                                <form method="POST"
-                                      action="{{route('admin.dashboard.appeal', ["id"=>$appeal->id])}}">
-                                    @csrf
-                                    <button
-                                        class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"
-                                        type="submit">approve
-                                    </button>
-                                </form>
+                                <div class='flex'>
+                                    <form method="POST"
+                                          action="{{route('admin.dashboard.appeal', ["id"=>$appeal->id])}}">
+                                        @csrf
+                                        <button
+                                            class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"
+                                            type="submit">approve
+                                        </button>
+                                    </form>
+                                    <form method="POST"
+                                          action="{{route('admin.dashboard.appeal.reject', ["id"=>$appeal->id])}}">
+                                        @csrf
+                                        <button
+                                            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1 text-center mr-2 mb-2"
+                                            type="submit">reject
+                                        </button>
+                                    </form>
+                                </div>
                             @else
                                 approved
                             @endif

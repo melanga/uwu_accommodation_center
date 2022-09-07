@@ -121,6 +121,10 @@ Route::group(["middleware" => ["auth", "verified"]], function () {
                 \App\Http\Controllers\Admin\AppealController::class,
                 "approve",
             ])->name("dashboard.appeal");
+            Route::post("dashboard/appeal/reject", [
+                \App\Http\Controllers\Admin\AppealController::class,
+                "reject",
+            ])->name("dashboard.appeal.reject");
         }
     );
 });

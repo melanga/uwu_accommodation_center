@@ -48,4 +48,13 @@ class AppealController extends Controller
                 ->with("error", "No free rooms");
         }
     }
+
+    public function reject(Request $request)
+    {
+        $appeal = Appeal::find($request->id);
+        $appeal->delete();
+        return redirect()
+            ->back()
+            ->with("success", "Appeal deleted");
+    }
 }
