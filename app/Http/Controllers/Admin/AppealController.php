@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appeal;
-use App\Models\HostalRoom;
+use App\Models\HostelRoom;
 use Illuminate\Http\Request;
 
 class AppealController extends Controller
@@ -19,23 +19,23 @@ class AppealController extends Controller
     {
         $appeal = Appeal::find($request->id);
         // take first free unassigned room
-        $hostalRoom = HostalRoom::where("hostal_id", $appeal->hostal_id)
+        $hostelRoom = HostelRoom::where("hostel_id", $appeal->hostel_id)
             ->where("student_email", "unassigned")
             ->orderBy("room_no", "asc")
             ->first();
         // take current existing room
-        $currentHostalRoom = HostalRoom::where(
+        $currentHostelRoom = HostelRoom::where(
             "student_email",
             $appeal->student->email
         )->first();
 
-        if ($hostalRoom) {
-            // unassign current room
-            $currentHostalRoom->student_email = "unassigned";
-            $currentHostalRoom->save();
+        if ($hostelRoom) {
+            // unassigned current room
+            $currentHostelRoom->student_email = "unassigned";
+            $currentHostelRoom->save();
             // add student to the room
-            $hostalRoom->student_email = $appeal->student->email;
-            $hostalRoom->save();
+            $hostelRoom->student_email = $appeal->student->email;
+            $hostelRoom->save();
             // set appeal to approved
             $appeal->approved = true;
             $appeal->save();

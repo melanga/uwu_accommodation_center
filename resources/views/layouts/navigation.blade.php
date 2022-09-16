@@ -13,7 +13,7 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @if(Auth::user()->role == 'warden')
                         <x-nav-link :href="route('warden.dashboard')" :active="request()->routeIs('warden.dashboard')">
-                            {{ __('Hostals') }}
+                            {{ __('Hostels') }}
                         </x-nav-link>
                         <x-nav-link :href="route('warden.dashboard.student')"
                                     :active="request()->routeIs('warden.dashboard.student')">
@@ -21,7 +21,7 @@
                         </x-nav-link>
                     @elseif(Auth::user()->role == 'admin')
                         <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                            {{ __('Hostals') }}
+                            {{ __('Hostels') }}
                         </x-nav-link>
                         <x-nav-link :href="route('admin.dashboard.student')"
                                     :active="request()->routeIs('admin.dashboard.student')">
@@ -35,8 +35,8 @@
                                     :active="request()->routeIs('admin.dashboard.appeal')">
                             {{ __('Appeals') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('admin.dashboard.addHostal')"
-                                    :active="request()->routeIs('admin.dashboard.addHostal')">
+                        <x-nav-link :href="route('admin.dashboard.addHostel')"
+                                    :active="request()->routeIs('admin.dashboard.addHostel')">
                             {{ __('Add Hostel') }}
                         </x-nav-link>
                     @endif
@@ -96,7 +96,7 @@
             @if(!(Auth::user()->role == 'student'))
                 <x-responsive-nav-link :href="route('warden.dashboard')"
                                        :active="request()->routeIs('warden.dashboard')">
-                    {{ __('Hostals') }}
+                    {{ __('Hostels') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('warden.dashboard.student')"
                                        :active="request()->routeIs('warden.dashboard.student')">

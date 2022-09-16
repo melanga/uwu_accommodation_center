@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Models\Hostal;
-use App\Models\HostalRoom;
+use App\Models\Hostel;
+use App\Models\HostelRoom;
 use App\Models\Student;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $assignedHostalRoom = HostalRoom::where(
+        $assignedHostelRoom = HostelRoom::where(
             "student_email",
             auth()->user()->email
         )->first();
@@ -21,18 +21,18 @@ class DashboardController extends Controller
             "%" . auth()->user()->email . "%"
         )->first();
         if ($student) {
-            $hostal = Hostal::where(
+            $hostel = Hostel::where(
                 "name",
                 "like",
                 "%" . $student->hostel . "%"
             )->first();
         } else {
-            $hostal = null;
+            $hostel = null;
         }
-        // $hostalRoom = HostalRoom::class::where('student_id', auth()->user()->id)->get()[0];
+        // $hostelRoom = HostelRoom::class::where('student_id', auth()->user()->id)->get()[0];
         return view("student.dashboard", [
-            "hostalRoom" => $assignedHostalRoom,
-            "hostal" => $hostal,
+            "hostelRoom" => $assignedHostelRoom,
+            "hostel" => $hostel,
         ]);
     }
 }

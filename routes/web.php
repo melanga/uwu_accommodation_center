@@ -52,7 +52,7 @@ Route::group(["middleware" => ["auth", "verified"]], function () {
         function () {
             Route::get("dashboard", [
                 \App\Http\Controllers\Warden\DashboardController::class,
-                "index_hostal",
+                "index_hostel",
             ])->name("dashboard");
             Route::get("dashboard/student", [
                 \App\Http\Controllers\Warden\DashboardController::class,
@@ -61,7 +61,7 @@ Route::group(["middleware" => ["auth", "verified"]], function () {
         }
     );
 
-    // admin's routes
+    // admins routes
     Route::group(
         [
             "prefix" => "admin",
@@ -72,7 +72,7 @@ Route::group(["middleware" => ["auth", "verified"]], function () {
             // hostel Dashboard view
             Route::get("dashboard", [
                 \App\Http\Controllers\Admin\DashboardController::class,
-                "index_hostal",
+                "index_hostel",
             ])->name("dashboard");
             // student Dashboard view
             Route::get("dashboard/student", [
@@ -84,31 +84,31 @@ Route::group(["middleware" => ["auth", "verified"]], function () {
                 \App\Http\Controllers\Admin\DashboardController::class,
                 "importStudents",
             ])->name("dashboard.import");
-            Route::get("dashboard/addHostal", [
+            Route::get("dashboard/addHostel", [
                 \App\Http\Controllers\Admin\DashboardController::class,
-                "index_addHostal",
-            ])->name("dashboard.addHostal");
-            Route::post("dashboard/addHostal", [
+                "index_addHostel",
+            ])->name("dashboard.addHostel");
+            Route::post("dashboard/addHostel", [
                 \App\Http\Controllers\Admin\DashboardController::class,
-                "store_hostal",
-            ])->name("dashboard.addHostal.store");
+                "store_hostel",
+            ])->name("dashboard.addHostel.store");
             // return assign Hostels view
-            Route::get("dashboard/assignHostal", [
+            Route::get("dashboard/assignHostel", [
                 \App\Http\Controllers\Admin\DashboardController::class,
                 "index_assignHostels",
             ])->name("dashboard.assignHostels");
             // assign imported students to hostels
-            Route::post("dashboard/assignHostal/assign", [
+            Route::post("dashboard/assignHostel/assign", [
                 \App\Http\Controllers\Admin\AssignHostelsController::class,
                 "store",
             ])->name("dashboard.assignHostels.assign");
             // delete imported students
-            Route::post("dashboard/assignHostal", [
+            Route::post("dashboard/assignHostel", [
                 \App\Http\Controllers\Admin\DashboardController::class,
                 "deleteStudents",
             ])->name("dashboard.assignHostels.deleteStudents");
             // clear assigned hostels
-            Route::post("dashboard/assignHostal/clear", [
+            Route::post("dashboard/assignHostel/clear", [
                 \App\Http\Controllers\Admin\AssignHostelsController::class,
                 "destroy",
             ])->name("dashboard.assignHostels.clear");

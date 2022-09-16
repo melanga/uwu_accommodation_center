@@ -12,10 +12,10 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create("hostal_rooms", function (Blueprint $table) {
+        Schema::create("hostel_rooms", function (Blueprint $table) {
             $table->id();
             $table
-                ->foreignId("hostal_id")
+                ->foreignId("hostel_id")
                 ->constrained()
                 ->onDelete("cascade");
             $table->integer("room_no");
@@ -32,6 +32,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists("hostal_rooms");
+        Schema::dropIfExists("hostel_rooms");
     }
 };

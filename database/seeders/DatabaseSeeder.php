@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Hostal;
-use App\Models\HostalRoom;
+use App\Models\HostelRoom;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(10)->create();
 
-        $customHostals = [
+        $customHostels = [
             [
                 "name" => "Silver Tips",
                 "address" => "Uva Wellassa University",
@@ -342,20 +342,20 @@ class DatabaseSeeder extends Seeder
             //                "room_capacity" => 2,
             //            ],
         ];
-        foreach ($customHostals as $eachHostal) {
-            $createdHostal = Hostal::create([
-                "name" => $eachHostal["name"],
-                "address" => $eachHostal["address"],
-                "type" => $eachHostal["type"],
-                "level" => $eachHostal["level"],
-                "room_count" => $eachHostal["room_count"],
-                "room_capacity" => $eachHostal["room_capacity"],
+        foreach ($customHostels as $eachHostel) {
+            $createdHostel = Hostal::create([
+                "name" => $eachHostel["name"],
+                "address" => $eachHostel["address"],
+                "type" => $eachHostel["type"],
+                "level" => $eachHostel["level"],
+                "room_count" => $eachHostel["room_count"],
+                "room_capacity" => $eachHostel["room_capacity"],
             ]);
             // create rooms while capacity is full
-            for ($i = 0; $i < $eachHostal["room_count"]; $i++) {
-                for ($j = 0; $j < $eachHostal["room_capacity"]; $j++) {
-                    HostalRoom::create([
-                        "hostal_id" => $createdHostal->id,
+            for ($i = 0; $i < $eachHostel["room_count"]; $i++) {
+                for ($j = 0; $j < $eachHostel["room_capacity"]; $j++) {
+                    HostelRoom::create([
+                        "hostal_id" => $createdHostel->id,
                         "room_no" => $i + 1,
                         "bed_no" => $j + 1,
                     ]);

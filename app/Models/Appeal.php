@@ -9,15 +9,15 @@ class Appeal extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["message", "approved", "student_id", "hostal_id"];
+    protected $fillable = ["message", "approved", "student_id", "hostel_id"];
 
     public function student()
     {
         return $this->belongsTo(User::class, "student_id");
     }
 
-    public function hostal()
+    public function hostel()
     {
-        return $this->belongsTo(Hostal::class, "hostal_id");
+        return $this->belongsTo(Hostel::class, "hostel_id");
     }
 }

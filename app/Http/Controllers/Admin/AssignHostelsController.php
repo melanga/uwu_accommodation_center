@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\HostalRoom;
+use App\Models\HostelRoom;
 use App\Models\Student;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
@@ -25,14 +25,14 @@ class AssignHostelsController extends Controller
             $year = $importedStudents[$numbers[$i]]->year;
             $gender = strtolower($importedStudents[$numbers[$i]]->gender);
             // check if email is already assigned to a hostel
-            $isAssigned = HostalRoom::where(
+            $isAssigned = HostelRoom::where(
                 "student_email",
                 $importedStudents[$numbers[$i]]->email
             )->exists();
             // if not assigned
             if (!$isAssigned) {
-                $firstEmptyHostelRoom = HostalRoom::whereHas(
-                    "hostal",
+                $firstEmptyHostelRoom = HostelRoom::whereHas(
+                    "hostel",
                     function ($query) use ($year, $gender) {
                         $query
                             ->where("type", "like", $gender)
@@ -57,7 +57,7 @@ class AssignHostelsController extends Controller
 
     public function destroy()
     {
-        HostalRoom::where("student_email", "not like", "unassigned")->update([
+        HostelRoom::where("student_email", "not like", "unassigned")->update([
             "student_email" => "unassigned",
         ]);
         return back()->with("success", "Hostels unassigned successfully");

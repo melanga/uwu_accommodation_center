@@ -69,7 +69,7 @@
                     <div>
                         <br><br>
 
-                        <form class="was-validated" action="{{route('admin.dashboard.addHostal.store')}}" method="POST">
+                        <form class="was-validated" action="{{route('admin.dashboard.addHostel.store')}}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="validationTextarea" class="form-label">Hostel Name</label>
@@ -180,7 +180,7 @@
                                 </div>
 
                                 {{--                                <div class="mb-3">--}}
-                                {{--                                    <label for="validationTextarea" class="form-label">Hostal contact number</label>--}}
+                                {{--                                    <label for="validationTextarea" class="form-label">Hostel contact number</label>--}}
                                 {{--                                    <input type="tel" id="roomCapacity" name="contact_no"--}}
                                 {{--                                           class="form-control is-invalid" placeholder="Enter a 10 digit number"--}}
                                 {{--                                           maxlength="10" minlength="10" required/>--}}
