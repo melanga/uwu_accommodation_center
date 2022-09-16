@@ -1,6 +1,6 @@
 <x-dashboard>
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">Appeals</h2>
-    @include('partials._search', ['route' => route('warden.dashboard'), 'text'=>"Search Hostals"])
+    @include('partials._search', ['route' => route('warden.dashboard'), 'text'=>"Search Hostels"])
     <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-6">
         @if($appeals)
             <table class="w-full text-left text-gray-500">
@@ -19,7 +19,7 @@
                     <tr class="bg-white border-b {{$appeal->approved ? "bg-green-100" : "bg-red-100"}}">
                         <td class="py-4 px-6">{{$appeal->student->email}}</td>
                         <td class="py-4 px-6">{{$appeal->student->first_name . " " . $appeal->student->last_name}}</td>
-                        <td class="py-4 px-6">{{$appeal->hostal->name}}</td>
+                        <td class="py-4 px-6">{{$appeal->hostel->name}}</td>
                         <td class="py-4 px-6">{{$appeal->message}}</td>
                         <td class="py-4 px-6">{{$appeal->approved ? "approved" : "pending"}}</td>
                         <td class="py-4 px-6 align-content-center">

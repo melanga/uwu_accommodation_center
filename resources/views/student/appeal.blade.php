@@ -1,5 +1,5 @@
 <x-dashboard>
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">Hostal Change Appeal</h2>
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">Hostel Change Appeal</h2>
     <div class="w-full grid place-items-center">
         <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
             <!-- Validation Errors -->
@@ -26,14 +26,14 @@
             </form>
             <form method="POST" action="{{ route('student.appeal') }}">
                 @csrf
-                <!-- appeal hostal -->
+                <!-- appeal hostel -->
                 <div>
-                    <label for="hostals" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select
-                        a Hostal</label>
-                    <select id="hostal" name="hostal"
+                    <label for="hostels" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select
+                        a Hostel</label>
+                    <select id="hostel" name="hostel"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                        <option selected>Choose a Hostal</option>
-                        @foreach($hostals as $hostel)
+                        <option selected>Choose a Hostel</option>
+                        @foreach($hostels as $hostel)
                             <option value="{{$hostel->id}}">{{$hostel->name}}</option>
                         @endforeach
                     </select>

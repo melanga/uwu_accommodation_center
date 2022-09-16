@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HostalRoom extends Model
+class HostelRoom extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function hostal()
+    public function hostel()
     {
-        return $this->belongsTo(Hostal::class, "hostal_id");
+        return $this->belongsTo(Hostel::class, "hostel_id");
     }
 
     public function student()
@@ -23,11 +23,10 @@ class HostalRoom extends Model
 
     public function getStudent()
     {
-        $student = User::where(
+        return User::where(
             "email",
             $this->attributes["student_email"]
         )->first();
-        return $student;
     }
 
     public function scopeFilter($query, $filters)

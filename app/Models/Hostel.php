@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Hostal extends Model
+class Hostel extends Model
 {
     use HasFactory;
 
@@ -22,22 +22,22 @@ class Hostal extends Model
         }
     }
 
-    public function getHostalOccupantCount()
+    public function getHostelOccupantCount()
     {
-        return DB::table("hostal_rooms")
-            ->where("hostal_id", $this->attributes["id"])
+        return DB::table("hostel_rooms")
+            ->where("hostel_id", $this->attributes["id"])
             ->where("student_email", "not like", "unassigned")
             ->count();
     }
 
     // relationships
-    public function hostalRooms()
+    public function hostelRooms()
     {
-        return $this->hasMany(HostalRoom::class, "hostal_id");
+        return $this->hasMany(HostelRoom::class, "hostel_id");
     }
 
     public function appeals()
     {
-        return $this->hasMany(Appeal::class, "hostal_id");
+        return $this->hasMany(Appeal::class, "hostel_id");
     }
 }

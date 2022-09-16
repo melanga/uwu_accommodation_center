@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Warden;
 
 use App\Http\Controllers\Controller;
-use App\Models\Hostal;
-use App\Models\HostalRoom;
+use App\Models\Hostel;
+use App\Models\HostelRoom;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index_hostal()
+    public function index_hostel()
     {
         $user = Auth::user();
         if ($user->role == "warden") {
-            $hostals = Hostal::latest()
+            $hostels = Hostel::latest()
                 ->filter(request(["search"]))
                 ->paginate(10);
-            return view("warden.hostal.dashboard", ["hostals" => $hostals]);
+            return view("warden.hostel.dashboard", ["hostels" => $hostels]);
         } else {
             abort(403);
         }
@@ -24,16 +24,16 @@ class DashboardController extends Controller
 
     public function index_student()
     {
-        $hostalRooms = HostalRoom::latest()
+        $hostelRooms = HostelRoom::latest()
             ->where("student_email", "not like", "unassigned")
             ->filter(request(["search"]))
             ->paginate(10);
-        $hostals = Hostal::latest()
+        $hostels = Hostel::latest()
             ->filter(request(["search"]))
             ->paginate(10);
         return view("warden.student.dashboard", [
-            "hostals" => $hostals,
-            "hostalRooms" => $hostalRooms,
+            "hostels" => $hostels,
+            "hostelRooms" => $hostelRooms,
         ]);
     }
 }

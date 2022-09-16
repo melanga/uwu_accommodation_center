@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
@@ -12,7 +13,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create("hostals", function (Blueprint $table) {
+        Schema::create("hostels", function (Blueprint $table) {
             $table->id();
             $table->string("name")->unique();
             $table->integer("room_capacity")->nullable();
@@ -31,6 +32,8 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists("hostals");
+        Schema::dropIfExists("hostel_rooms");
+        Schema::disableForeignKeyConstraints();
+        Schema::drop("hostels");
     }
 };

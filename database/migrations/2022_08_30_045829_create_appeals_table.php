@@ -21,8 +21,8 @@ return new class extends Migration {
                 ->constrained("users")
                 ->onDelete("set null");
             $table
-                ->foreignId("hostal_id")
-                ->constrained("hostals")
+                ->foreignId("hostel_id")
+                ->constrained("hostels")
                 ->onDelete("cascade");
             $table->timestamps();
         });
